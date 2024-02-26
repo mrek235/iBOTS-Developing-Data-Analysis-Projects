@@ -6,6 +6,7 @@ In this workshop, you will gain hands-on experience in crafting modular code scr
 
 By the end of this workshop, you'll be able to develop and manage data analysis pipelines, ensuring that your projects are not only advanced in their execution but also sustainable in the long term - your future self will thank you for it!
 
+Hellowsies
 ---
 
 ### Session 1: Git, GitHub, and Python Scripts
