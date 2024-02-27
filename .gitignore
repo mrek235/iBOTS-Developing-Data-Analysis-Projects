@@ -4,3 +4,10 @@ miniconda
 *processed*
 *.pyc
 *.zip
+trial*.npy
+trial*.mat
+trial*.csv
+cell*.npy
+metadata.json
+task_and_performance*.json
+brain_areas.csv
