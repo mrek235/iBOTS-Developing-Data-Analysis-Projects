@@ -21,3 +21,7 @@ Hellowsies
 - [**Exercises - part 1**](session3/notebooks/1_python_functions.ipynb): Creating python functions
 - [**Exercises - part 2**](session3/notebooks/2_functions_from_modules.ipynb): Organizing functions into Python modules
 - [**Project**](session3/notebooks/3_identifying_repetitive_patterns.ipynb): Extracting functions from existing project code and storing them into modules 
+
+### Session 4: Workflows with Snakemake [![Generic badge](https://img.shields.io/badge/Open_in_Gitpod-FF8F0E.svg)](https://gitpod.io/#https://github.com/ibehave-ibots/iBOTS-Developing-Data-Analysis-Projects)
+
+### Session 5: Scaling up Snakemake Workflows [![Generic badge](https://img.shields.io/badge/Open_in_Gitpod-FF8F0E.svg)](https://gitpod.io/#https://github.com/ibehave-ibots/iBOTS-Developing-Data-Analysis-Projects)
