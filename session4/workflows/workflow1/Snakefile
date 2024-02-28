@@ -22,3 +22,33 @@ rule combine_two_arrays:
         array2 = np.load(input[1])
         data = np.concatenate((array1, array2))
         np.save(output[0], data)
+
+rule change_csv_to_parquet:
+    input : 'data/raw/session.csv'
+    output: 'data/processed/session.parquet'
+    run:
+        import pandas as pd 
+        pd.read_csv(input[0]).to_parquet(output[0])
+
+rule standardize_array:
+    input: 'data/raw/array.npy'
+    output: 'data/processed/standardized_array.npy'
+    run:
+        import numpy as np
+        arr = np.load(input[0])
+        std_array = arr-arr.mean()/arr.std()
+        np.save(output[0],std_array)
+
+rule standardize_array_with_script:
+    input:'data/raw/array.npy'
+    output:'data/processed/standardized_array_with_script.npy'
+    shell:
+        'python scripts/standardize_array.py {input[0]} {output[0]}'
+
+rule extract_valid_trials:
+    input:'data/raw/session.csv'
+    output:'data/processed/session_valid_trials.csv'
+    shell:
+        'python scripts/extract_valid_trials.py {input} {output}'
+
+

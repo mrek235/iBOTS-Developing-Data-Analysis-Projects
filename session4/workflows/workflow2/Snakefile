@@ -1,0 +1,59 @@
+workdir: "../.." # With this we can specify where should Snakemake look for things relative to this path
+
+
+
+rule clean_data:
+    input: "data/raw/session.csv"
+    output: "data/processed/clean_dataset.csv"
+    run:
+        import pandas as pd
+        df = pd.read_csv(input[0])
+        df_clean = df.dropna()
+        df_clean.to_csv(output[0], index=False)
+
+
+rule correct_responses:
+    input: "data/processed/clean_dataset.csv"
+    output: "data/processed/session_valid_correct_response.csv"
+    run:
+        import pandas as pd
+        df = pd.read_csv(input[0])
+        corr_resp = df[df['response']==1]
+        corr_resp.to_csv(output[0])
+
+rule extract_columns:
+    input: "data/processed/clean_dataset.csv"
+    output: "data/processed/specific_columns.csv"
+    run:
+        import pandas as pd
+        df = pd.read_csv(input[0])
+        # Assuming we want columns 'A' and 'B'
+        df_extracted = df[['subject_id', 'trial']]
+        df_extracted.to_csv(output[0], index=False)
+
+
+rule combine_two_arrays:
+    input: 
+        "data/raw/array1.npy",
+        "data/raw/array2.npy"
+    output:
+        "data/processed/combined_array.npy"
+    run:
+        import numpy as np
+        array1 = np.load(input[0])
+        array2 = np.load(input[1])
+        data = np.concatenate((array1, array2))
+        np.save(output[0], data)
+
+rule standardize_combined_array:
+    input: 'data/processed/combined_array.npy'
+    output: 'data/processed/standardized_combined_array.npy'
+    run:
+        import numpy as np
+        arr = np.load(input[0])
+        std_array = arr-arr.mean()/arr.std()
+        np.save(output[0],std_array)
+rule all:
+    input:
+        "data/other_workflow/combined_array_standardized.npy",
+        "data/processed/session_valid_correct_response.csv"
